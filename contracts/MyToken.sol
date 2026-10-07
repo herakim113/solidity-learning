@@ -1,9 +1,5 @@
-// Token : smart contract based
-// BIT, ETH, XRP, KAIA : native token
 // SPDX-License-Identifier:MIT
-// SPDX-License-Identifier: SEE LICENSE IN LICENSE
-
-pragma solidity ^0.8.28;
+agma solidity ^0.8.28;
 
 contract MyToken {
     string public name;
@@ -13,32 +9,22 @@ contract MyToken {
     uint256 public totalSupply;
     mapping(address => uint256) public balanceOf;
 
-
     constructor(string memory _name, string memory _symbol, uint8 _decimal) {
         name = _name;
         symbol = _symbol;
         decimals = _decimal;
-// uint8 --> 8bit unsigned int , uint16, ... ,uint256
         _mint(1*10**uint256(decimals), msg.sender);
-        // transaction
-        // from , to, data, value, gas, ...
-        // uint8 --> 8bit unsigned int , uint16, ... ,uint256
-    }
+          }
 
     function _mint(uint256 amount, address owner) internal {
         totalSupply += amount;
         balanceOf[owner] += amount;
     }
 
-//     function totalSupply() external view returns (uint256){
-//         return totalSupply;
-//     }
-//     // 타입 지정은 returns
-//     // external 외부 호출만 가능 public은 내부 외부 둘다 가능한 차이
-//     function balanceOf(address owner) external view returns (uint256) {
-//         return balanceOf[owner];
-//     }
-//     function name() external view returns (string memory) {
-//         return name;
-//     }
+    function transfer(uint256 amount, address to) external {
+        require(balanceOf[msg.sender] >= amount, "insufficient balance");
+
+        balanceOf[msg.sender] -= amount;
+        balanceOf[to] += amount;
+    }
 }
