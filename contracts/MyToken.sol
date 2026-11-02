@@ -3,7 +3,6 @@ pragma solidity ^0.8.28;
 
 import "./ManagedAccess.sol";
 
-
 contract MyToken is ManagedAcess {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed spender, uint256 amount);
